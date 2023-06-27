@@ -94,8 +94,8 @@ func dataSourcePublishers() *schema.Resource {
 							Type:     schema.TypeString,
 							Computed: true,
 						},
-						"publisher_upgrade_profiles_id": &schema.Schema{
-							Type:     schema.TypeString,
+						"publisher_upgrade_profiles_external_id": &schema.Schema{
+							Type:     schema.TypeFloat,
 							Computed: true,
 						},
 						"upgrade_failed_reason": &schema.Schema{
@@ -110,11 +110,11 @@ func dataSourcePublishers() *schema.Resource {
 											Computed: true,
 										},
 										"error_code": &schema.Schema{
-											Type:     schema.TypeInt,
+											Type:     schema.TypeFloat,
 											Computed: true,
 										},
 										"timestamp": &schema.Schema{
-											Type:     schema.TypeInt,
+											Type:     schema.TypeFloat,
 											Computed: true,
 										},
 										"version": &schema.Schema{
@@ -124,6 +124,10 @@ func dataSourcePublishers() *schema.Resource {
 									},
 								},
 							},
+						},
+						"lbrokerconnect": &schema.Schema{
+							Type:     schema.TypeBool,
+							Computed: true,
 						},
 						"upgrade_request": &schema.Schema{
 							Type:     schema.TypeBool,
@@ -141,6 +145,10 @@ func dataSourcePublishers() *schema.Resource {
 							Type:     schema.TypeString,
 							Computed: true,
 						},
+						"tags": &schema.Schema{
+							Type:     schema.Type,
+							Computed: true,
+						},
 						"stitcher_id": &schema.Schema{
 							Type:     schema.TypeFloat,
 							Computed: true,
@@ -153,7 +161,7 @@ func dataSourcePublishers() *schema.Resource {
 								Elem: &schema.Resource{
 									Schema: map[string]*schema.Schema{
 										"eee_support": &schema.Schema{
-											Type:     schema.TypeString,
+											Type:     schema.TypeBool,
 											Computed: true,
 										},
 										"hdd_free": &schema.Schema{
@@ -166,6 +174,10 @@ func dataSourcePublishers() *schema.Resource {
 										},
 										"ip_address": &schema.Schema{
 											Type:     schema.TypeString,
+											Computed: true,
+										},
+										"latency": &schema.Schema{
+											Type:     schema.TypeFloat,
 											Computed: true,
 										},
 										"version": &schema.Schema{
