@@ -1,8 +1,8 @@
 HOSTNAME=github.com
-NAMESPACE=netskopeoss
+NAMESPACE=jeff-clearcover
 NAME=netskope
 BINARY=terraform-provider-${NAME}
-VERSION=0.2.2
+VERSION=0.2.3
 OS_ARCH=$(shell terraform -version | (grep ^on) | sed 's/on //' )
 
 default: install
