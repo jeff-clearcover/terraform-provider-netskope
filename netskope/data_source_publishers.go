@@ -77,113 +77,124 @@ func dataSourcePublishers() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourcePublishersRead,
 		Schema: map[string]*schema.Schema{
-			"filter": &schema.Schema{
+			"filter": {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
-			"publishers": &schema.Schema{
+			"publishers": {
 				Type:     schema.TypeList,
 				Computed: true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
-						"publisher_id": &schema.Schema{
+						"publisher_id": {
 							Type:     schema.TypeInt,
 							Computed: true,
 						},
-						"publisher_name": &schema.Schema{
+						"publisher_name": {
 							Type:     schema.TypeString,
 							Computed: true,
 						},
-						"publisher_upgrade_profiles_external_id": &schema.Schema{
+						"publisher_upgrade_profiles_external_id": {
 							Type:     schema.TypeFloat,
 							Computed: true,
 						},
-						"upgrade_failed_reason": &schema.Schema{
-							Type:     schema.TypeMap,
+						"upgrade_failed_reason": {
+							Type:     schema.TypeSet,
 							Computed: true,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-								Elem: &schema.Resource{
-									Schema: map[string]*schema.Schema{
-										"detail": &schema.Schema{
-											Type:     schema.TypeString,
-											Computed: true,
-										},
-										"error_code": &schema.Schema{
-											Type:     schema.TypeFloat,
-											Computed: true,
-										},
-										"timestamp": &schema.Schema{
-											Type:     schema.TypeFloat,
-											Computed: true,
-										},
-										"version": &schema.Schema{
-											Type:     schema.TypeString,
-											Computed: true,
-										},
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"detail": {
+										Type:     schema.TypeString,
+										Computed: true,
+									},
+									"error_code": {
+										Type:     schema.TypeFloat,
+										Computed: true,
+									},
+									"timestamp": {
+										Type:     schema.TypeFloat,
+										Computed: true,
+									},
+									"version": {
+										Type:     schema.TypeString,
+										Computed: true,
 									},
 								},
 							},
 						},
-						"lbrokerconnect": &schema.Schema{
+						"lbrokerconnect": {
 							Type:     schema.TypeBool,
 							Computed: true,
 						},
-						"upgrade_request": &schema.Schema{
+						"upgrade_request": {
 							Type:     schema.TypeBool,
 							Computed: true,
 						},
-						"common_name": &schema.Schema{
+						"common_name": {
 							Type:     schema.TypeString,
 							Computed: true,
 						},
-						"registered": &schema.Schema{
+						"registered": {
 							Type:     schema.TypeBool,
 							Computed: true,
 						},
-						"status": &schema.Schema{
+						"upgrade_status": {
+							Type:     schema.TypeSet,
+							Computed: true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"status_failure_code": {
+										Type:     schema.TypeFloat,
+										Computed: true,
+									},
+									"upstat": {
+										Type:     schema.TypeString,
+										Computed: true,
+									},
+								},
+							},
+						},
+						"status": {
 							Type:     schema.TypeString,
 							Computed: true,
 						},
-						"tags": &schema.Schema{
-							Type:     schema.Type,
+						"tags": {
+							Type:     schema.TypeList,
+							Elem:     &schema.Schema{Type: schema.TypeString},
 							Computed: true,
 						},
-						"stitcher_id": &schema.Schema{
+						"stitcher_id": {
 							Type:     schema.TypeFloat,
 							Computed: true,
 						},
-						"assessment": &schema.Schema{
-							Type:     schema.TypeMap,
+						"assessment": {
+							Type:     schema.TypeSet,
 							Computed: true,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-								Elem: &schema.Resource{
-									Schema: map[string]*schema.Schema{
-										"eee_support": &schema.Schema{
-											Type:     schema.TypeBool,
-											Computed: true,
-										},
-										"hdd_free": &schema.Schema{
-											Type:     schema.TypeString,
-											Computed: true,
-										},
-										"hdd_total": &schema.Schema{
-											Type:     schema.TypeString,
-											Computed: true,
-										},
-										"ip_address": &schema.Schema{
-											Type:     schema.TypeString,
-											Computed: true,
-										},
-										"latency": &schema.Schema{
-											Type:     schema.TypeFloat,
-											Computed: true,
-										},
-										"version": &schema.Schema{
-											Type:     schema.TypeString,
-											Computed: true,
-										},
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"eee_support": {
+										Type:     schema.TypeBool,
+										Computed: true,
+									},
+									"hdd_free": {
+										Type:     schema.TypeString,
+										Computed: true,
+									},
+									"hdd_total": {
+										Type:     schema.TypeString,
+										Computed: true,
+									},
+									"ip_address": {
+										Type:     schema.TypeString,
+										Computed: true,
+									},
+									"latency": {
+										Type:     schema.TypeFloat,
+										Computed: true,
+									},
+									"version": {
+										Type:     schema.TypeString,
+										Computed: true,
 									},
 								},
 							},

@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/hashicorp/terraform-plugin-docs v0.8.1
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.10.1
-	github.com/jeff-clearcover/netskope-api-client-go v0.0.0-20230627011612-3b2ebcbbb4de
+	github.com/jeff-clearcover/netskope-api-client-go v0.0.0-20230627022223-b7321615c845
 )
 
 require (

@@ -254,6 +254,8 @@ github.com/jeff-clearcover/netskope-api-client-go v0.0.0-20230627010658-3b22c46b
 github.com/jeff-clearcover/netskope-api-client-go v0.0.0-20230627010658-3b22c46be0a9/go.mod h1:bRQ+3w0SH29r3o/W5gDnbjsoVsfVMMJCCZ9VmzFVZo0=
 github.com/jeff-clearcover/netskope-api-client-go v0.0.0-20230627011612-3b2ebcbbb4de h1:AZXeahUZ+c8cRLOZ3DgG/ZwZaJn3j2m+X+oS/i6+qgU=
 github.com/jeff-clearcover/netskope-api-client-go v0.0.0-20230627011612-3b2ebcbbb4de/go.mod h1:jGwHVyEgIgKv/QRRZM82X11KHp2g5qPxQieHapK2/qM=
+github.com/jeff-clearcover/netskope-api-client-go v0.0.0-20230627022223-b7321615c845 h1:A5wW5US0abQJbLLptOhIySBToQXWQqSCuGRkmo39DYs=
+github.com/jeff-clearcover/netskope-api-client-go v0.0.0-20230627022223-b7321615c845/go.mod h1:jGwHVyEgIgKv/QRRZM82X11KHp2g5qPxQieHapK2/qM=
 github.com/jessevdk/go-flags v1.5.0/go.mod h1:Fw0T6WPc1dYxT4mKEZRfG5kJhaTDP9pj1c2EWnYs/m4=
 github.com/jhump/protoreflect v1.6.0 h1:h5jfMVslIg6l29nsMs0D8Wj17RDVdNYti0vDN/PZZoE=
 github.com/jhump/protoreflect v1.6.0/go.mod h1:eaTn3RZAmMBcV0fifFvlm6VHNz3wSkYyXYWUh7ymB74=
