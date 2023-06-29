@@ -3,6 +3,7 @@ package netskope
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"strconv"
 	"time"
 
@@ -10,6 +11,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/jeff-clearcover/netskope-api-client-go/nsgo"
 )
+
+//func flattenPublishersReadData(publishers *[]map[string]interface{}) []interface{} {
+//	if publishers != nil {
+//		pubs = make([]interface{}, len(*publishers), len(*publishers))
+//		for i, publisher := range *publishers {
+//			publisher["assessment"] = publishers[i]
+//		}
+//	}
+//}
 
 func dataSourcePublishersRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
 	//Collect Diags
@@ -30,11 +40,47 @@ func dataSourcePublishersRead(ctx context.Context, d *schema.ResourceData, m int
 	jsonData, _ := json.Marshal(pubs)
 
 	pubsStruct := nsgo.PublishersList{}
-	json.Unmarshal(jsonData, &pubsStruct)
+	err = json.Unmarshal(jsonData, &pubsStruct)
+	if err != nil {
+		return diag.FromErr(err)
+	}
+
+	diags = append(diags, diag.Diagnostic{
+		Severity: diag.Warning,
+		Summary:  "PUBSSTRUCT",
+		Detail:   "PUBSSTRUCT: " + fmt.Sprintf("%+v\n%#v\n", pubsStruct, pubsStruct),
+	})
 
 	newjsonData, _ := json.Marshal(pubsStruct.Publishers)
+
+	diags = append(diags, diag.Diagnostic{
+		Severity: diag.Warning,
+		Summary:  "NEWJSON",
+		Detail:   "NEWJSON: " + fmt.Sprintf("%s", newjsonData),
+	})
+
 	pubsMap := make([]map[string]interface{}, 0)
-	json.Unmarshal(newjsonData, &pubsMap)
+	err = json.Unmarshal(newjsonData, &pubsMap)
+
+	diags = append(diags, diag.Diagnostic{
+		Severity: diag.Warning,
+		Summary:  "PUBSMAPERROR",
+		Detail:   "PUBSMAP: " + fmt.Sprintf("%+v\n%#v\n", pubsMap, pubsMap),
+	})
+
+	//for _, publisher := range pubsMap {
+	//	publisher["assessment"] = publisher["assessment"].(*schema.Set)
+	//	diags = append(diags, diag.Diagnostic{
+	//		Severity: diag.Warning,
+	//		Summary:  "PUBLISHER",
+	//		Detail:   "PUBLISHER: " + fmt.Sprintf("%s", publisher["assessment"]),
+	//	})
+	//	return diags
+	//}
+
+	if err != nil {
+		return diag.FromErr(err)
+	}
 
 	if err := d.Set("publishers", pubsMap); err != nil {
 		/*
@@ -99,24 +145,12 @@ func dataSourcePublishers() *schema.Resource {
 							Computed: true,
 						},
 						"upgrade_failed_reason": {
-							Type:     schema.TypeSet,
+							Type:     schema.TypeList,
 							Computed: true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									"detail": {
-										Type:     schema.TypeString,
-										Computed: true,
-									},
-									"error_code": {
-										Type:     schema.TypeFloat,
-										Computed: true,
-									},
 									"timestamp": {
 										Type:     schema.TypeFloat,
-										Computed: true,
-									},
-									"version": {
-										Type:     schema.TypeString,
 										Computed: true,
 									},
 								},
@@ -139,7 +173,7 @@ func dataSourcePublishers() *schema.Resource {
 							Computed: true,
 						},
 						"upgrade_status": {
-							Type:     schema.TypeSet,
+							Type:     schema.TypeList,
 							Computed: true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
@@ -159,7 +193,7 @@ func dataSourcePublishers() *schema.Resource {
 							Computed: true,
 						},
 						"tags": {
-							Type:     schema.TypeList,
+							Type:     schema.TypeSet,
 							Elem:     &schema.Schema{Type: schema.TypeString},
 							Computed: true,
 						},
@@ -168,7 +202,7 @@ func dataSourcePublishers() *schema.Resource {
 							Computed: true,
 						},
 						"assessment": {
-							Type:     schema.TypeSet,
+							Type:     schema.TypeList,
 							Computed: true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
